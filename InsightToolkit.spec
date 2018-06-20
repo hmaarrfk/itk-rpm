@@ -13,7 +13,7 @@
 Name:           InsightToolkit
 Summary:        Insight Toolkit library for medical image processing
 Version:        %{_ver_major}.%{_ver_minor}.%{_ver_release}
-Release:        7%{?dist}
+Release:        8%{?dist}
 License:        ASL 2.0
 Group:          Applications/Engineering
 Source0:        http://sourceforge.net/projects/itk/files/itk/%{_ver_major}.%{_ver_minor}/%{name}-%{version}.tar.xz
@@ -178,7 +178,7 @@ pushd %{_target_platform}
        -DITK_USE_SYSTEM_GOOGLETEST=ON \
        -DITK_INSTALL_LIBRARY_DIR=%{_lib}/ \
        -DITK_INSTALL_INCLUDE_DIR=include/%{name} \
-       -DITK_INSTALL_PACKAGE_DIR=%{_lib}/cmake/%{name}/ \
+       -DITK_INSTALL_PACKAGE_DIR=%{_lib}/cmake/ITK/ \
        -DITK_INSTALL_RUNTIME_DIR:PATH=%{_bindir} \
        -DITK_INSTALL_DOC_DIR=share/doc/%{name}/
 
@@ -191,7 +191,7 @@ popd
 
 # I dont know why this is necessary.
 # Otherwise I can't build elatix
-sed -i 's/GTest::GTest;GTest::Main/gtest/' ${RPM_BUILD_ROOT}%{_libdir}/cmake/InsightToolkit/Modules/ITKGoogleTest.cmake
+sed -i 's/GTest::GTest;GTest::Main/gtest/' ${RPM_BUILD_ROOT}%{_libdir}/cmake/ITK/Modules/ITKGoogleTest.cmake
 
 # Install examples
 mkdir -p %{buildroot}%{_datadir}/%{name}/examples
@@ -210,13 +210,13 @@ done
 %files devel
 %{_libdir}/*.so
 %exclude %{_libdir}/libITKVtkGlue*.so
-%{_libdir}/cmake/%{name}/
+%{_libdir}/cmake/ITK/
 %{_includedir}/%{name}/
 %exclude %{_includedir}/%{name}/itkImageToVTKImageFilter.h*
 %exclude %{_includedir}/%{name}/itkVTKImageToImageFilter.h*
 %exclude %{_includedir}/%{name}/QuickView.h
 %exclude %{_includedir}/%{name}/vtkCaptureScreen.h
-%exclude %{_libdir}/cmake/%{name}/Modules/ITKVtkGlue.cmake
+%exclude %{_libdir}/cmake/ITK/Modules/ITKVtkGlue.cmake
 
 %files examples
 %{_datadir}/%{name}/examples
@@ -236,9 +236,13 @@ done
 %{_includedir}/%{name}/itkVTKImageToImageFilter.h*
 %{_includedir}/%{name}/QuickView.h
 %{_includedir}/%{name}/vtkCaptureScreen.h
-%{_libdir}/cmake/%{name}/Modules/ITKVtkGlue.cmake
+%{_libdir}/cmake/ITK/Modules/ITKVtkGlue.cmake
 
 %changelog
+* Wed Jun 20 2018 Mark Harfouche <mark.harfouche@gmail.com> - 4.13.0-8
+- Moved the location of the cmake file in accordance to the removal of
+  FindITK.cmake in cmake's organization.
+
 * Tue Jun 19 2018 Mark Harfouche <mark.harfouche@gmail.com> - 4.13.0-7
 - Use system gtest
 
