@@ -13,14 +13,14 @@
 Name:           InsightToolkit
 Summary:        Insight Toolkit library for medical image processing
 Version:        %{_ver_major}.%{_ver_minor}.%{_ver_release}
-Release:        8%{?dist}
+Release:        9%{?dist}
 License:        ASL 2.0
 Group:          Applications/Engineering
-Source0:        http://sourceforge.net/projects/itk/files/itk/%{_ver_major}.%{_ver_minor}/%{name}-%{version}.tar.xz
-Source1:        http://downloads.sourceforge.net/project/itk/itk/%{_ver_doc_major}.%{_ver_doc_minor}/InsightSoftwareGuide-Book1-%{_ver_doc_major}.%{_ver_doc_minor}.%{_ver_doc_release}.pdf
-Source2:        http://downloads.sourceforge.net/project/itk/itk/%{_ver_doc_major}.%{_ver_doc_minor}/InsightSoftwareGuide-Book2-%{_ver_doc_major}.%{_ver_doc_minor}.%{_ver_doc_release}.pdf
-Source3:        http://sourceforge.net/projects/itk/files/itk/%{_ver_major}.%{_ver_minor}/InsightData-%{version}.tar.xz
-URL:            http://www.itk.org/
+Source0:        https://sourceforge.net/projects/itk/files/itk/%{_ver_major}.%{_ver_minor}/%{name}-%{version}.tar.xz
+Source1:        https://downloads.sourceforge.net/project/itk/itk/%{_ver_doc_major}.%{_ver_doc_minor}/InsightSoftwareGuide-Book1-%{_ver_doc_major}.%{_ver_doc_minor}.%{_ver_doc_release}.pdf
+Source2:        https://downloads.sourceforge.net/project/itk/itk/%{_ver_doc_major}.%{_ver_doc_minor}/InsightSoftwareGuide-Book2-%{_ver_doc_major}.%{_ver_doc_minor}.%{_ver_doc_release}.pdf
+Source3:        https://sourceforge.net/projects/itk/files/itk/%{_ver_major}.%{_ver_minor}/InsightData-%{version}.tar.xz
+URL:            https://www.itk.org/
 Patch0:         %{name}-0001-Set-lib-lib64-according-to-the-architecture.patch
 
 BuildRequires:  cmake
@@ -239,6 +239,9 @@ done
 %{_libdir}/cmake/ITK/Modules/ITKVtkGlue.cmake
 
 %changelog
+* Wed Jun 20 2018 Mark Harfouche <mark.harfouche@gmail.com> - 4.13.0-9
+- Sources now all use https instead of http
+
 * Wed Jun 20 2018 Mark Harfouche <mark.harfouche@gmail.com> - 4.13.0-8
 - Moved the location of the cmake file in accordance to the removal of
   FindITK.cmake in cmake's organization.
